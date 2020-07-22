@@ -13,6 +13,14 @@ class App extends Component{
   }
 
   render(){
+    const buttonStyle = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '0.5rem',
+      cursor: 'pointer'
+    };
+
     return(
       <div className="App">
         <h1>First change on Page.</h1>
@@ -21,7 +29,9 @@ class App extends Component{
           <p>And the second one.</p> 
         </div>
         <div>
-          <button onClick={this.switchNameHandler.bind(this, 'Davel')}>Switch the Name</button>
+          <button
+            style={buttonStyle}
+            onClick={this.switchNameHandler.bind(this, 'Davel')}>Switch the Name</button>
           {this.getPersonList()}
         </div>
       </div>
