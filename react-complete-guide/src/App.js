@@ -6,21 +6,9 @@ import Person from './Person/Person';
 class App extends Component{
   state = {
     personList: [
-      {
-        "id": "0000-0000-0000-0000",
-        "name": "Mateusz",
-        "age": 25
-      },
-      {
-        "id": "0000-0000-0000-0001",
-        "name": "Jan",
-        "age": 27
-      },
-      {
-        "id": "0000-0000-0000-0002",
-        "name": "Tirion",
-        "age": 54
-      }
+      { id: "0000-0000-0000-0000", name: "Mateusz", age: 25},
+      { id: "0000-0000-0000-0001", name: "Jan", age: 27},
+      { id: "0000-0000-0000-0002", name: "Tirion", age: 54}
     ]
   }
 
@@ -33,27 +21,43 @@ class App extends Component{
           <p>And the second one.</p> 
         </div>
         <div>
-          <button onClick={this.switchNameHandler}>Switch the Name</button>
+          <button onClick={this.switchNameHandler.bind(this, 'Davel')}>Switch the Name</button>
           {this.getPersonList()}
         </div>
       </div>
     )
   }
 
-  switchNameHandler = () =>{
-    // console.log("was clicked");
-    this.setState({personList: [
-      {
-        "id": "0000-0000-0000-0000",
-        "name": "Davel",
-        "age": 24
-      }
-    ]})
-  };
+  switchNameHandler = (newName) => {
+    this.setState({
+      personList: [
+        { id: "0000-0000-0000-0000", name: newName, age: 25},
+        { id: "0000-0000-0000-0001", name: "Jan", age: 27},
+        { id: "0000-0000-0000-0002", name: "Tirion", age: 54}
+      ]
+    })
+  }
+
+  nameChangeHandler = (event) => {
+    this.setState({
+      personList: [
+        { id: "0000-0000-0000-0000", name: event.target.value, age: 25},
+        { id: "0000-0000-0000-0001", name: "Jan", age: 27},
+        { id: "0000-0000-0000-0002", name: "Tirion", age: 54}
+      ]
+    })
+  }
 
   getPersonList(){
     const personList = this.state.personList.map(person => 
-      <Person key={person.id} name={person.name} age={person.age} />
+      <Person
+        key={person.id}
+        id={person.id}
+        name={person.name}
+        age={person.age}
+        click={this.switchNameHandler.bind(this, "POGO")}
+        changed={this.nameChangeHandler}
+      />
     );
     return personList;
   }
