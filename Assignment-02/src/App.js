@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import Validation from './Validation/Validation';
+import Char from './Char/Char';
+
 
 class App extends Component {
 
@@ -17,6 +20,28 @@ class App extends Component {
     });
   }
 
+  getChars = () => {
+    let text = this.state.text.split('');
+
+    const chars = text.map((character, index) => {
+      return <Char char={character} key={index} delete={this.deleteCharListener.bind(this, index)} />
+    });
+    return chars;
+  }
+
+  deleteCharListener = (index) => {
+    let text = this.state.text.split('');
+    text.splice(index, 1);
+    
+    const newText = text.join('');
+    const newLength = newText.length;
+
+    this.setState({
+        length: newLength,
+        text: newText
+      });
+  }
+
   render() {
     return (
       <div className="App">
@@ -31,8 +56,10 @@ class App extends Component {
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
         
         <div>
-          <input type='text' onChange={(event) => this.changeListener(event)} />
+          <input type='text' onChange={(event) => this.changeListener(event)} value={this.state.text} />
           <p>String length is {this.state.length}.</p>
+          <Validation length={this.state.length}/>
+          {this.getChars()}
         </div>
       </div>
     );
