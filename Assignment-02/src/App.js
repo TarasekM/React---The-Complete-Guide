@@ -7,15 +7,12 @@ import Char from './Char/Char';
 class App extends Component {
 
   state = {
-    length: 0,
     text: ''
   }
 
   changeListener = (event) =>{
     const newText = event.target.value;
-    const newLength = newText.length;
     this.setState({
-      length: newLength,
       text: newText
     });
   }
@@ -34,10 +31,8 @@ class App extends Component {
     text.splice(index, 1);
     
     const newText = text.join('');
-    const newLength = newText.length;
 
     this.setState({
-        length: newLength,
         text: newText
       });
   }
@@ -57,8 +52,8 @@ class App extends Component {
         
         <div>
           <input type='text' onChange={(event) => this.changeListener(event)} value={this.state.text} />
-          <p>String length is {this.state.length}.</p>
-          <Validation length={this.state.length}/>
+          <p>String length is {this.state.text.length}.</p>
+          <Validation length={this.state.text.length}/>
           {this.getChars()}
         </div>
       </div>
