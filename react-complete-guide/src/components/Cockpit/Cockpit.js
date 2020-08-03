@@ -20,15 +20,15 @@ const Cockpit = (props) => {
   return (
     <div>
       <h1>First change on Page.</h1>
-    <div>
-      <p className={textStyles.join(' ')}>A list of people.</p>
-      <p>And the second one.</p> 
-    </div>
-    <div>
-      <button className={buttonStyles.join(' ')} onClick={props.toggle}>
-        Toggle the Name
-      </button>
-    </div>
+      <div>
+        <p className={textStyles.join(' ')}>A list of people.</p>
+        <p>And the second one.</p> 
+      </div>
+      <div>
+        <button className={buttonStyles.join(' ')} onClick={props.toggle}>
+          Toggle the Name
+        </button>
+      </div>
     </div>
   );
 };
