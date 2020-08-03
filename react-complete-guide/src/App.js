@@ -1,24 +1,9 @@
 import React, {Component} from 'react';
-import styled from 'styled-components';
 
 import Person from './Person/Person';
 
-import './App.css';
+import styles from './App.module.css';
 
-
-
-const StyledButton = styled.button`
-  background-color: green;
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 0.5rem;
-  cursor: pointer;
-
-  &:hover {
-    background-color: lightgreen;
-  }
-`;
 
 class App extends Component{
   state = {
@@ -76,39 +61,35 @@ class App extends Component{
   
   render(){
     let persons = null;
-
+    let buttonClass = [styles.Button]
     if (this.state.showPersons === true){
       persons = (
         <div>
           {this.getPersonList()}
         </div>
-      )
-      StyledButton.backgroundColor = 'red';
-      StyledButton[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      };
+      );
+      buttonClass.push(styles.Red);
     }
 
     let classes = [];
     if (this.state.personList.length <= 2){
-      classes.push('text-red');
+      classes.push(styles.TextRed);
     }
     if (this.state.personList.length <= 1){
-      classes.push('bold');
+      classes.push(styles.Bold);
     }
 
     return(
-      <div className="App">
+      <div className={styles.App}>
         <h1>First change on Page.</h1>
         <div>
           <p className={classes.join(' ')}>A list of people.</p>
           <p>And the second one.</p> 
         </div>
         <div>
-          <StyledButton onClick={this.togglePersonsHandler}>
+          <button className={buttonClass.join(' ')} onClick={this.togglePersonsHandler}>
             Toggle the Name
-          </StyledButton>
+          </button>
           { persons }
         </div>
       </div>
