@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import './App.css';
+
 import Person from './Person/Person';
+
+import styles from './App.module.css';
 
 
 class App extends Component{
@@ -58,35 +60,36 @@ class App extends Component{
   }
   
   render(){
-    const buttonStyle = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '0.5rem',
-      cursor: 'pointer'
-    };
-
     let persons = null;
-
+    let buttonClass = [styles.Button]
     if (this.state.showPersons === true){
       persons = (
         <div>
           {this.getPersonList()}
         </div>
-      )
+      );
+      buttonClass.push(styles.Red);
+    }
+
+    let classes = [];
+    if (this.state.personList.length <= 2){
+      classes.push(styles.TextRed);
+    }
+    if (this.state.personList.length <= 1){
+      classes.push(styles.Bold);
     }
 
     return(
-      <div className="App">
+      <div className={styles.App}>
         <h1>First change on Page.</h1>
         <div>
-          <p>Just a paragraph.</p>
+          <p className={classes.join(' ')}>A list of people.</p>
           <p>And the second one.</p> 
         </div>
         <div>
-          <button
-            style={buttonStyle}
-            onClick={this.togglePersonsHandler}>Toggle the Name</button>
+          <button className={buttonClass.join(' ')} onClick={this.togglePersonsHandler}>
+            Toggle the Name
+          </button>
           { persons }
         </div>
       </div>
