@@ -19,7 +19,7 @@ const Cockpit = (props) => {
 
   return (
     <div>
-      <h1>First change on Page.</h1>
+      <h1>{props.title}</h1>
       <div>
         <p className={textStyles.join(' ')}>A list of people.</p>
         <p>And the second one.</p> 
